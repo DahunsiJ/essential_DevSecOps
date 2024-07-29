@@ -1,8 +1,10 @@
-# Ignore Terrafor
-*.terraform/
-*.terraform.lock.hcl
-*terraform.tfstate
-*terraform.tfstate.backup
+# Ignore Terraform directories
+Ignore Terraform state files
+TerraformIAC/terraform.tfstate
+TerraformIAC/terraform.tfstate.backup
+TerraformIAC/.terraform/
+bfg-1.14.0.jar
+
 # Ignore other unnecessary files
 *.log
 *.tmp
