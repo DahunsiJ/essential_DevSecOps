@@ -37,32 +37,32 @@ resource "azurerm_linux_virtual_machine" "DevSecOps_vm" {
 }
 
 # Azure Backup for VM
-resource "azurerm_recovery_services_vault" "DevSecOps-vault" {
-  name                = "DevSecOps-recovery-vault"
-  location            = azurerm_resource_group.DevSecOps_rg.location
-  resource_group_name = azurerm_resource_group.DevSecOps_rg.name
-  sku                 = "Standard"
+# resource "azurerm_recovery_services_vault" "DevSecOps-vault" {
+#   name                = "DevSecOps-recovery-vault"
+#   location            = azurerm_resource_group.DevSecOps_rg.location
+#   resource_group_name = azurerm_resource_group.DevSecOps_rg.name
+#   sku                 = "Standard"
 
-  #   soft_delete_enabled = true
-}
+#   #   soft_delete_enabled = true
+# }
 
-resource "azurerm_backup_policy_vm" "DevSecOps-backup_policy" {
-  name                = "DevSecOps-recovery-vault-policy"
-  resource_group_name = azurerm_resource_group.DevSecOps_rg.name
-  recovery_vault_name = azurerm_recovery_services_vault.DevSecOps-vault.name
+# resource "azurerm_backup_policy_vm" "DevSecOps-backup_policy" {
+#   name                = "DevSecOps-recovery-vault-policy"
+#   resource_group_name = azurerm_resource_group.DevSecOps_rg.name
+#   recovery_vault_name = azurerm_recovery_services_vault.DevSecOps-vault.name
 
-  backup {
-    frequency = "Daily"
-    time      = "23:00"
-  }
-  retention_daily {
-    count = 10
-  }
-}
+#   backup {
+#     frequency = "Daily"
+#     time      = "23:00"
+#   }
+#   retention_daily {
+#     count = 10
+#   }
+# }
 
-resource "azurerm_backup_protected_vm" "vm1" {
-  resource_group_name = azurerm_resource_group.DevSecOps_rg.name
-  recovery_vault_name = azurerm_recovery_services_vault.DevSecOps-vault.name
-  source_vm_id        = azurerm_linux_virtual_machine.DevSecOps_vm.id
-  backup_policy_id    = azurerm_backup_policy_vm.DevSecOps-backup_policy.id
-}
+# resource "azurerm_backup_protected_vm" "vm1" {
+#   resource_group_name = azurerm_resource_group.DevSecOps_rg.name
+#   recovery_vault_name = azurerm_recovery_services_vault.DevSecOps-vault.name
+#   source_vm_id        = azurerm_linux_virtual_machine.DevSecOps_vm.id
+#   backup_policy_id    = azurerm_backup_policy_vm.DevSecOps-backup_policy.id
+# }

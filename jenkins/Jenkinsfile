@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+    stages {
+        stage('Clone repository') {
+            steps {
+                git 'https://github.com/Essentialng/edrivers.git'
+            }
+        }
+        stage('Build Docker Images') {
+            steps {
+                script {
+                    sh 'docker-compose -f ../docker-compose/docker-compose.yml build'
+                }
+            }
+        }
+        stage('Deploy to Staging') {
+            steps {
+                script {
+                    sh 'docker-compose -f /path/to/docker-compose.yml up -d edrivers-staging'
+                }
+            }
+        }
+        stage('Deploy to Production') {
+            steps {
+                input "Deploy to production?"
+                script {
+                    sh 'docker-compose -f /path/to/docker-compose.yml up -d edrivers-production'
+                }
+            }
+        }
+    }
+}
