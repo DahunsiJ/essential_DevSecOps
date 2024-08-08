@@ -62,7 +62,8 @@ resource "azurerm_network_security_group" "DevSecOps-east-us-NSG" {
   name                = "DevSecOps-east-us-NSG"
   location            = azurerm_resource_group.DevSecOps-east-usRG.location
   resource_group_name = azurerm_resource_group.DevSecOps-east-usRG.name
-
+  
+# security_rules
   security_rule {
     name                       = "allow_sonarqube9000"
     priority                   = 120
@@ -100,7 +101,7 @@ resource "azurerm_network_security_group" "DevSecOps-east-us-NSG" {
   }
 }
 
-# Network Interface Security Group Association
+# Network Interface Security Group Association 
 resource "azurerm_network_interface_security_group_association" "DevSecOps-east-us-NISGA" {
   network_interface_id      = azurerm_network_interface.DevSecOps-east-us-NIC.id
   network_security_group_id = azurerm_network_security_group.DevSecOps-east-us-NSG.id
