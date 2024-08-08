@@ -1,0 +1,14 @@
+# Ignore Terrafor
+*.terraform/
+*.terraform.lock.hcl
+*terraform.tfstate
+*terraform.tfstate.backup
+# Ignore other unnecessary files
+*.log
+*.tmp
+*.bak
+
+# Ignore all files larger than 100 MB
+*.tar
+*.zip
+*.gz
