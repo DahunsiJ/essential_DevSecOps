@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  edrivers-staging:
+    build:
+      context: "https://github.com/Essentialng/edrivers"
+    image: app1-staging:latest
+    ports:
+      - "3001:3000"
+    environment:
+      - NODE_ENV=staging
+
+  app1-production:
+    build:
+      context: ./app1
+    image: app1-production:latest
+    ports:
+      - "4001:3000"
+    environment:
+      - NODE_ENV=production
+
+  app2-staging:
+    build:
+      context: ./app2
+    image: app2-staging:latest
+    ports:
+      - "3002:3000"
+    environment:
+      - NODE_ENV=staging
+
+  app2-production:
+    build:
+      context: ./app2
+    image: app2-production:latest
+    ports:
+      - "4002:3000"
+    environment:
+      - NODE_ENV=production
+
+  # Repeat for other applications...
+  app6-staging:
+    build:
+      context: ./app6
+    image: app6-staging:latest
+    ports:
+      - "3006:3000"
+    environment:
+      - NODE_ENV=staging
+
+  app6-production:
+    build:
+      context: ./app6
+    image: app6-production:latest
+    ports:
+      - "4006:3000"
+    environment:
+      - NODE_ENV=production
