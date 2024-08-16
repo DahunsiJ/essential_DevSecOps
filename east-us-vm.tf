@@ -62,8 +62,32 @@ resource "azurerm_network_security_group" "DevSecOps-east-us-NSG" {
   name                = "DevSecOps-east-us-NSG"
   location            = azurerm_resource_group.DevSecOps-east-usRG.location
   resource_group_name = azurerm_resource_group.DevSecOps-east-usRG.name
-  
-# security_rules
+
+  # security_rules
+  security_rule {
+    name                       = "Allow_eDrives_frontend4000"
+    priority                   = 140
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "3000"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Allow_eDrives_backend4000"
+    priority                   = 130
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "4000"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
   security_rule {
     name                       = "allow_sonarqube9000"
     priority                   = 120
@@ -112,7 +136,7 @@ resource "azurerm_linux_virtual_machine" "DevSecOps-east-us-VM" {
   name                = "DevSecOps-east-us-VM"
   location            = azurerm_resource_group.DevSecOps-east-usRG.location
   resource_group_name = azurerm_resource_group.DevSecOps-east-usRG.name
-  size                = "Standard_B2ms"
+  size                = "Standard_B4ms"
   admin_username      = "DevSecOps_Admin"
   network_interface_ids = [
     azurerm_network_interface.DevSecOps-east-us-NIC.id
@@ -135,7 +159,7 @@ resource "azurerm_linux_virtual_machine" "DevSecOps-east-us-VM" {
     caching              = "ReadWrite"
     storage_account_type = "StandardSSD_LRS"
     # managed_disk_type = "StandardSSD_LRS"
-    disk_size_gb = 30 # OS disk size in GiB
+    disk_size_gb = 100 # OS disk size in GiB
   }
 
 
