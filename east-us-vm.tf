@@ -65,7 +65,31 @@ resource "azurerm_network_security_group" "DevSecOps-east-us-NSG" {
 
   # security_rules
   security_rule {
-    name                       = "Allow_eDrives_frontend4000"
+    name                       = "Allow_ejobs_backend3003"
+    priority                   = 160
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "3003"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Allow_ejobs_frontend3002"
+    priority                   = 150
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "3002"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Allow_eDrives_frontend3000"
     priority                   = 140
     direction                  = "Inbound"
     access                     = "Allow"
